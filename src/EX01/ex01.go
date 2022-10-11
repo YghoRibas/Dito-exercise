@@ -7,7 +7,7 @@ package EX01
 func IsSubsequence(listP []int, listS []int) bool {
 	listPSize := len(listP)
 	listSSize := len(listS)
-	var aux []int
+	var aux = make([]int, listSSize)
 	var counter int = 0
 
 	if listSSize > listPSize || (listP == nil || listS == nil) {
