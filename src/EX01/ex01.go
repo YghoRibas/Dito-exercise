@@ -16,6 +16,12 @@ func IsSubsequence(listP []int, listS []int) bool {
 			}
 		}
 	} 
-
-	return aux[] == listS
+	
+	for k := 0; k < listSSize; k++ {
+		if aux[k] != listS[k] {
+			return false
+		}
+	}
+	
+	return true
 }

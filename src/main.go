@@ -8,5 +8,7 @@ import(
 )
 
 func main() {
-	fmt.Println(IsSubsequence([1,2,3,4,5],[2,5,4]))
+	var p = []int {1,2,3,4,5}
+	var s = []int {2,5,4}
+	fmt.Println(IsSubsequence(p, s))
 }
