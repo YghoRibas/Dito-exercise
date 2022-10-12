@@ -4,14 +4,22 @@ package EX01
 // 	"fmt"
 // )
 
-func IsSubsequence(listP []int, listS []int) bool {
+type SubsequenceResult struct {
+	ItsSubsequence 		bool
+	SumOutOfPrincipal	int
+}
+
+func IsSubsequence(listP []int, listS []int) SubsequenceResult {
+	var sResult SubsequenceResult
 	listPSize := len(listP)
 	listSSize := len(listS)
 	var auxiliar = make([]int, listSSize)
 	var indexCounter int = 0
 
+	sResult.ItsSubsequence = true
+
 	if listSSize > listPSize || (listPSize < 1 || listSSize < 1) {
-		return false
+		sResult.ItsSubsequence = false
 	} 
 
 	for i:= 0; i < listSSize; i++ {
@@ -23,11 +31,13 @@ func IsSubsequence(listP []int, listS []int) bool {
 			}
 		}
 		if auxiliar[i] != listS[i] {
-			return false
+			sResult.ItsSubsequence = false
 		}
 	}
+
+	sResult.SumOutOfPrincipal = SumNumberOutOfPrincipalList(listP,listS)
 	
-	return true
+	return sResult
 }
 
 func SumNumberOutOfPrincipalList(listP []int, listS []int) int {
