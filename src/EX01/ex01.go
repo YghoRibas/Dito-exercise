@@ -12,6 +12,7 @@ func IsSubsequence(listP []int, listS []int) SubsequenceResult {
 	listPSize := len(listP)
 	listSSize := len(listS)
 	var indexCounter int = 0
+	var auxiliar = make([]int, listSSize)
 
 	sResult.ItsSubsequence = true
 
@@ -24,12 +25,16 @@ func IsSubsequence(listP []int, listS []int) SubsequenceResult {
 	for i:= 0; i < listSSize; i++ {
 		for j:= indexCounter; j < listPSize; j++ {
 			if listP[j] == listS[i] {
+				auxiliar[i] = listS[i]
 				indexCounter = j + 1
 				break
 			}
 			if j == listPSize - 1 {
 				sResult.ItsSubsequence = false
 			}
+		}
+		if auxiliar[i] != listS[i] {
+			sResult.ItsSubsequence = false
 		}
 		if !sResult.ItsSubsequence {
 			break
