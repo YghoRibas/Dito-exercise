@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestShouldTestASubsequence(t *testing.T) {
+func TestShouldBeASubsequence(t *testing.T) {
 	var pTest = []int {1,2,3,4,5}
 	var sTest = []int {2,4,5}
 
@@ -12,12 +12,15 @@ func TestShouldTestASubsequence(t *testing.T) {
 
 	finalResult := IsSubsequence(pTest, sTest)
 
-	if finalResult != expectedResult {
+	if finalResult.ItsSubsequence != expectedResult {
+		t.Error("erro")
+	}
+	if finalResult.SumOutOfPrincipal != 0 {
 		t.Error("erro")
 	}
 }
 
-func TestShouldTestANonSubsequence(t *testing.T) {
+func TestShouldBeANonSubsequence(t *testing.T) {
 	var pTest = []int {1,2,3,4,5}
 	var sTest = []int {2,5,3}
 
@@ -25,8 +28,11 @@ func TestShouldTestANonSubsequence(t *testing.T) {
 
 	finalResult := IsSubsequence(pTest, sTest)
 
-	if finalResult != expectedResult {
+	if finalResult.ItsSubsequence != expectedResult {
 		t.Error("erro msg")
+	}
+	if finalResult.SumOutOfPrincipal != 0 {
+		t.Error("erro")
 	}
 }
 
@@ -38,7 +44,10 @@ func TestShouldTestValuesOutOfPrincipalArray(t *testing.T) {
 
 	finalResult := IsSubsequence(pTest, sTest)
 
-	if finalResult != expectedResult {
+	if finalResult.ItsSubsequence != expectedResult {
+		t.Error("erro")
+	}
+	if finalResult.SumOutOfPrincipal != 6 {
 		t.Error("erro")
 	}	
 }
@@ -51,9 +60,12 @@ func TestShouldTestAVoidArrayPrincipalListAsArgument(t *testing.T) {
 
 	finalResult := IsSubsequence(pTest, sTest)
 
-	if finalResult != expectedResult {
+	if finalResult.ItsSubsequence != expectedResult {
 		t.Error("erro")
-	}	
+	}
+	if finalResult.SumOutOfPrincipal != 12 {
+		t.Error("erro")
+	}		
 }
 
 func TestShouldTestAVoidArraySubsequenceListAsArgument(t *testing.T) {
@@ -64,9 +76,12 @@ func TestShouldTestAVoidArraySubsequenceListAsArgument(t *testing.T) {
 
 	finalResult := IsSubsequence(pTest, sTest)
 
-	if finalResult != expectedResult {
+	if finalResult.ItsSubsequence != expectedResult {
 		t.Error("erro")
-	}	
+	}
+	if finalResult.SumOutOfPrincipal != 0 {
+		t.Error("erro")
+	}		
 }
 
 func TestShouldTestIfSubsequenceListIsBiggerThanPrincipalList(t *testing.T) {
@@ -77,46 +92,10 @@ func TestShouldTestIfSubsequenceListIsBiggerThanPrincipalList(t *testing.T) {
 
 	finalResult := IsSubsequence(pTest, sTest)
 
-	if finalResult != expectedResult {
+	if finalResult.ItsSubsequence != expectedResult {
 		t.Error("erro")
-	}	
-}
-
-func TestShouldSumMoreThanOneValuesOutOfPrincipalList(t *testing.T) {
-	var pTest = []int {1,2,3,4,5}
-	var sTest = []int {1,7,8,2}
-
-	var expectedResult = 15;
-
-	finalResult := SumNumberOutOfPrincipalList(pTest,sTest)
-
-	if finalResult != expectedResult {
+	}
+	if finalResult.SumOutOfPrincipal != 6 {
 		t.Error("erro")
-	}	
-}
-
-func TestShouldSumOnlyOneValuesOutOfPrincipalList(t *testing.T) {
-	var pTest = []int {1,2,3,4,5}
-	var sTest = []int {1,7,5,2}
-
-	var expectedResult = 7;
-
-	finalResult := SumNumberOutOfPrincipalList(pTest,sTest)
-
-	if finalResult != expectedResult {
-		t.Error("erro")
-	}	
-}
-
-func TestShouldSumNoOneValuesOutOfPrincipalList(t *testing.T) {
-	var pTest = []int {1,2,3,4,5}
-	var sTest = []int {1,4,5,2}
-
-	var expectedResult = 0;
-
-	finalResult := SumNumberOutOfPrincipalList(pTest,sTest)
-
-	if finalResult != expectedResult {
-		t.Error("erro")
-	}	
+	}		
 }

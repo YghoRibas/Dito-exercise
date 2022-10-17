@@ -1,46 +1,51 @@
 package EX01
 
-// import (
-// 	"fmt"
-// )
-
+// SubsequenceResult ...
 type SubsequenceResult struct {
 	ItsSubsequence 		bool
 	SumOutOfPrincipal	int
 }
 
+// IsSubsequence ...
 func IsSubsequence(listP []int, listS []int) SubsequenceResult {
 	var sResult SubsequenceResult
 	listPSize := len(listP)
 	listSSize := len(listS)
-	var auxiliar = make([]int, listSSize)
 	var indexCounter int = 0
 
 	sResult.ItsSubsequence = true
 
-	if listSSize > listPSize || (listPSize < 1 || listSSize < 1) {
+	if !verifyArraySizeIsValid(listPSize,listSSize) {
 		sResult.ItsSubsequence = false
-	} 
+		sResult.SumOutOfPrincipal = sumNumberOutOfPrincipalList(listP,listS)
+		return sResult
+	}
 
 	for i:= 0; i < listSSize; i++ {
 		for j:= indexCounter; j < listPSize; j++ {
 			if listP[j] == listS[i] {
-				auxiliar[i] = listP[j]
 				indexCounter = j + 1
 				break
 			}
+			if j == listPSize - 1 {
+				sResult.ItsSubsequence = false
+			}
 		}
-		if auxiliar[i] != listS[i] {
-			sResult.ItsSubsequence = false
+		if !sResult.ItsSubsequence {
+			break
 		}
 	}
 
-	sResult.SumOutOfPrincipal = SumNumberOutOfPrincipalList(listP,listS)
+	sResult.SumOutOfPrincipal = sumNumberOutOfPrincipalList(listP,listS)
 	
 	return sResult
 }
 
-func SumNumberOutOfPrincipalList(listP []int, listS []int) int {
+func verifyArraySizeIsValid(listPSize int, listSSize int) bool {
+	return listSSize <= listPSize && listPSize > 0 && listSSize > 0
+}
+
+func sumNumberOutOfPrincipalList(listP []int, listS []int) int {
 	listPSize := len(listP)
 	listSSize := len(listS)
 	var outOfArrayCounter int = 0
@@ -54,6 +59,10 @@ func SumNumberOutOfPrincipalList(listP []int, listS []int) int {
 				outOfArrayCounter += listS[i]
 			}
 		}
+		if listPSize == 0 {
+			outOfArrayCounter += listS[i]
+		}
 	}
+
 	return outOfArrayCounter
 }
