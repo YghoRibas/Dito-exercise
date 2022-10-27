@@ -9,39 +9,30 @@ import(
 	"github.com/gin-gonic/gin"
 )
 
-var pa = EX04.PersonAddress{
-	Street: "av. a",
-	Number: 30817,
-	Country: "Brazil",
-	PostalCode: 123412431,
-}
-
-var p = EX04.Person{
-	Name: "Andre",
-	Age: 31,
-	Address: pa,
-	Dependents: []string{},
-}
+var p = EX04.Person{}
 
 func main() {
 	router := gin.Default()
     router.POST("/person", postPerson)
 	router.GET("/person", getPerson)
 
-    router.Run("localhost:3333")
+    router.Run("localhost:3000")
 }
 
 func postPerson(c *gin.Context) {
-    var newDep string
+    var newPerson EX04.Person
 
-    if err := c.BindJSON(&newDep); err != nil {
+    if err := c.BindJSON(&newPerson); err != nil {
         return
     }
 
-    p.Dependents = append(p.Dependents, newDep)
-    c.IndentedJSON(http.StatusCreated, newDep)
+    p.Name = newPerson.Name
+	p.Age = newPerson.Age
+	p.Address = newPerson.Address
+	p.Dependents = newPerson.Dependents
+    c.IndentedJSON(http.StatusCreated, newPerson)
 }
 
 func getPerson(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, p)
-}	
+}
