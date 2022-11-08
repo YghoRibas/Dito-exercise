@@ -1,38 +1,45 @@
 package main
 
-//"github.com/YghoRibas/Dito-exercise/EX01"
-//"github.com/YghoRibas/Dito-exercise/EX02"
+// "github.com/umpc/go-sortedmap"
+// "github.com/umpc/go-sortedmap/asc"
 
 import(
-	"net/http"
-	"github.com/YghoRibas/Dito-exercise/EX04"
-	"github.com/gin-gonic/gin"
+	"fmt"
 )
 
-var p = EX04.Person{}
-
 func main() {
-	router := gin.Default()
-    router.POST("/person", postPerson)
-	router.GET("/person", getPerson)
+	fruits := map[string]int {
+		"orange": 112,
+		"apple": 200,
+		"strawberry": 56,
+		"banana":174,
+	}
 
-    router.Run("localhost:3000")
+	fruits["pineapple"] = 873
+	fmt.Println(fruits)
+
+	fruits = removeElementsUnder100(fruits)
+	fmt.Println(fruits)
+
+	// fruits := sortedmap.New(5, asc.Int)
+	// fruits.Insert("Laranja", 112)
+	// fruits.Insert("Abacaxi", 867)
+	// fruits.Insert("Manga", 316)
+	// fruits.Insert("Melancia", 1343)
+	// fruits.Insert("uva", 46)
+	// fruits.Insert("Morango",52)
+
+	// fruits.BoundedDelete(0,100)
+	// fruits.BoundedDelete(0,100)
+
+ 	// fmt.Println("map: ", fruits)
 }
 
-func postPerson(c *gin.Context) {
-    var newPerson EX04.Person
-
-    if err := c.BindJSON(&newPerson); err != nil {
-        return
-    }
-
-    p.Name = newPerson.Name
-	p.Age = newPerson.Age
-	p.Address = newPerson.Address
-	p.Dependents = newPerson.Dependents
-    c.IndentedJSON(http.StatusCreated, newPerson)
-}
-
-func getPerson(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, p)
-}
+func removeElementsUnder100(m map[string]int) map[string]int {
+	for key := range m {
+		if m[key] < 100 {
+			delete(m, key)
+		} 
+	}
+	return m
+} 
