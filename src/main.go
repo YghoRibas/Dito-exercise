@@ -8,8 +8,9 @@ import (
 )
 
 func main() {
-	mulResult := EX05.MultValuesBetween(2, 9)
 
-	EX05.PrintResult(mulResult)
+	multResult := EX05.MultValuesBetween(1, 0)
+
+	EX05.PrintResult(multResult)
 
 }

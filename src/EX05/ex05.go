@@ -1,11 +1,17 @@
 package EX05
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // MultValuesBetween...
 func MultValuesBetween(x, y int) [3][]int {
 	var initial, final int
 	var values [3][]int
+
+	if x < 1 || y < 1 {
+		panic("A entrada deve ser sempre maior que zero")
+	}
 
 	if x <= y {
 		initial, final = x, y
