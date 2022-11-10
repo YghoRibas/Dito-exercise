@@ -28,12 +28,16 @@ func MultValuesBetween(x, y int) [3][]int {
 // PrintResult...
 func PrintResult(values [3][]int) {
 	minor, major := getMinorMajorPalindromes(values)
-	resultOperators := getPalindromesAndOperators(values)
 
-	fmt.Println("Menor: ", minor, " | Maior: ", major)
-	for i := 0; i < len(resultOperators[0]); i++ {
-		fmt.Printf("Resultado: %d | Operadores: (%d , %d)\n", resultOperators[0][i], resultOperators[1][i], resultOperators[2][i])
+	for i := 0; i < len(values[0]); i++ {
+		if values[0][i] == minor {
+			fmt.Printf("Menor: %d, | Operadores: (%d, %d)\n", minor, values[1][i], values[2][i])
+		}
+		if values[0][i] == major {
+			fmt.Printf("Maior: %d, | Operadores: (%d, %d)\n", major, values[1][i], values[2][i])
+		}
 	}
+
 }
 
 // isPalindrome...
@@ -65,18 +69,4 @@ func getMinorMajorPalindromes(values [3][]int) (int, int) {
 	}
 
 	return minor, major
-}
-
-func getPalindromesAndOperators(values [3][]int) [3][]int {
-	var multOperators [3][]int
-
-	for i := 0; i < len(values[0]); i++ {
-		if isPalindrome(values[0][i]) {
-			multOperators[0] = append(multOperators[0], values[0][i])
-			multOperators[1] = append(multOperators[1], values[1][i])
-			multOperators[2] = append(multOperators[2], values[2][i])
-		}
-	}
-
-	return multOperators
 }
