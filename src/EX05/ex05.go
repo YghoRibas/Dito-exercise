@@ -64,7 +64,6 @@ func getMinorMajorPalindromes(values [3][]int) (Palindrome, Palindrome) {
 		if isPalindrome(item) {
 			if minorAux == 0 || item < minorAux {
 				minorAux = item
-
 			}
 			if item > majorAux {
 				majorAux = item
@@ -76,7 +75,7 @@ func getMinorMajorPalindromes(values [3][]int) (Palindrome, Palindrome) {
 		if minorAux == item {
 			minor.Product = minorAux
 			minor.PairX = append(minor.PairX, values[1][index])
-			minor.PairX = append(minor.PairY, values[2][index])
+			minor.PairY = append(minor.PairY, values[2][index])
 		}
 		if majorAux == item {
 			major.Product = majorAux

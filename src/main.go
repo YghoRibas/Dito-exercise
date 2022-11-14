@@ -18,9 +18,8 @@ func main() {
 		fmt.Printf("(%d , %d)", minor.PairX[i], minor.PairY[i])
 	}
 
-	fmt.Printf("Maior: %d, Operadores: ", major.Product)
+	fmt.Printf("\nMaior: %d, Operadores: ", major.Product)
 	for index := range major.PairY {
 		fmt.Printf("(%d , %d)", major.PairX[index], major.PairY[index])
 	}
-
 }

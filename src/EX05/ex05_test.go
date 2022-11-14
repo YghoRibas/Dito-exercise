@@ -30,8 +30,8 @@ func TestShouldReturnMinorMajorPalindromesInRange(t *testing.T) {
 		}
 	}
 
-	for index, item := range minor.PairX {
-		if item != expectedMinor.PairX[index] {
+	for index, item := range minor.PairY {
+		if item != expectedMinor.PairY[index] {
 			t.Error("erro")
 		}
 	}
