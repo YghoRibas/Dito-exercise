@@ -1,11 +1,13 @@
 package EX05
 
-import (
-	"fmt"
-)
+type Palindrome struct {
+	Product int
+	PairX   []int
+	PairY   []int
+}
 
 // MultValuesBetween...
-func MultValuesBetween(x, y int) [3][]int {
+func multValuesBetween(x, y int) [3][]int {
 	var initial, final int
 	var values [3][]int
 
@@ -32,18 +34,12 @@ func MultValuesBetween(x, y int) [3][]int {
 }
 
 // PrintResult...
-func PrintResult(values [3][]int) {
-	minor, major := getMinorMajorPalindromes(values)
+func GetMinorMajorPalindromesBetweenRange(x, y int) (Palindrome, Palindrome) {
 
-	for i := 0; i < len(values[0]); i++ {
-		if values[0][i] == minor {
-			fmt.Printf("Menor: %d, | Operadores: (%d, %d)\n", minor, values[1][i], values[2][i])
-		}
-		if values[0][i] == major {
-			fmt.Printf("Maior: %d, | Operadores: (%d, %d)\n", major, values[1][i], values[2][i])
-		}
-	}
+	matrix := multValuesBetween(x, y)
+	minor, major := getMinorMajorPalindromes(matrix)
 
+	return minor, major
 }
 
 // isPalindrome...
@@ -60,17 +56,32 @@ func isPalindrome(val int) bool {
 }
 
 // getMinorMajorPalindromes...
-func getMinorMajorPalindromes(values [3][]int) (int, int) {
-	var minor, major int
+func getMinorMajorPalindromes(values [3][]int) (Palindrome, Palindrome) {
+	var minorAux, majorAux int
+	var minor, major Palindrome
 
 	for _, item := range values[0] {
 		if isPalindrome(item) {
-			if minor == 0 || item < minor {
-				minor = item
+			if minorAux == 0 || item < minorAux {
+				minorAux = item
+
 			}
-			if item > major {
-				major = item
+			if item > majorAux {
+				majorAux = item
 			}
+		}
+	}
+
+	for index, item := range values[0] {
+		if minorAux == item {
+			minor.Product = minorAux
+			minor.PairX = append(minor.PairX, values[1][index])
+			minor.PairX = append(minor.PairY, values[2][index])
+		}
+		if majorAux == item {
+			major.Product = majorAux
+			major.PairX = append(major.PairX, values[1][index])
+			major.PairY = append(major.PairY, values[2][index])
 		}
 	}
 
